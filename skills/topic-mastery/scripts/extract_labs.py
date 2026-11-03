@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Shebang: lets macOS and Linux run this file directly with the first python3 on PATH.
 """Turn a chapter's code blocks into a runnable, self-explaining lab pack.
 
 Why: code that only lives inside a PDF cannot be run, edited or version-controlled. Mark any code
@@ -14,13 +15,24 @@ Usage:
     python extract_labs.py chapter.html -o labs/ [--title "Chapter 1 labs"]
 Creates <out>/<files>, README.md (setup + run + expected output table), requirements.txt, run_all.py.
 """
+# argparse: command-line options. re: regular expressions. unescape: turns &lt; back into <, and so on.
+# Path: file and folder paths.
 import argparse
 import re
 from html import unescape
 from pathlib import Path
 
+# Matches one whole <pre ...>...</pre> block. Group 1 is the attribute text inside the opening tag;
+# group 2 is the code between the tags. re.S lets "." cross line breaks; re.I ignores case.
 BLOCK = re.compile(r"<pre\b([^>]*)>(.*?)</pre>", re.S | re.I)
 
+# RUN_ALL is the text of the run_all.py file that is written into every lab folder.
+# It is a Python string, so the code inside it is NOT run here. Its contents are copied verbatim
+# into the generated run_all.py. What the generated script does, in order:
+#   1. load labs.json (the list of lab files, whether to run them, and the expected text)
+#   2. run each .py file with this Python, and each .cs file with `dotnet run`
+#   3. print PASS when the exit code is 0 and the expected text appears in the output
+#   4. print a summary and exit 1 if any lab failed
 RUN_ALL = '''#!/usr/bin/env python3
 """Run every lab file and compare with the expected output. Usage: python run_all.py"""
 import json, shutil, subprocess, sys
@@ -53,39 +65,51 @@ sys.exit(1 if failed else 0)
 
 
 def attr(attrs, name):
+    """Return the value of one attribute, such as data-file, from an attribute string, or "" if absent."""
+    # rf'...' is a raw f-string: {name} is filled in, and backslashes stay as written.
+    # The pattern finds name="value" and captures the value between the double quotes.
     m = re.search(rf'{name}\s*=\s*"([^"]*)"', attrs)
-    return unescape(m.group(1)) if m else ""
+    return unescape(m.group(1)) if m else ""  # unescape turns &quot; and similar back into characters
 
 
 def main():
+    """Read the chapter HTML, write each marked code block as a file, and write the support files."""
     ap = argparse.ArgumentParser()
-    ap.add_argument("html")
-    ap.add_argument("-o", "--out", required=True)
-    ap.add_argument("--title", default="Lab pack")
+    ap.add_argument("html")  # the chapter HTML file
+    ap.add_argument("-o", "--out", required=True)  # the output folder
+    ap.add_argument("--title", default="Lab pack")  # the heading used in the generated README
     a = ap.parse_args()
     out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)  # create the output folder and any missing parents; no error if it exists
     raw = Path(a.html).read_text(encoding="utf-8")
-    labs, pips = [], set()
-    for m in BLOCK.finditer(raw):
-        attrs, inner = m.group(1), m.group(2)
-        rel = attr(attrs, "data-file")
+    labs, pips = [], set()  # labs: one record per lab file. pips: the set of pip packages needed.
+    for m in BLOCK.finditer(raw):  # visit every <pre> block in the chapter
+        attrs, inner = m.group(1), m.group(2)  # the attributes and the code inside the block
+        rel = attr(attrs, "data-file")  # the relative path to write, e.g. "python/01_neuron.py"
         if not rel:
-            continue
-        # strip only formatting tags; a raw "<" in code such as "i < n" must survive
+            continue  # blocks without data-file are only for reading, so skip them
+        # Strip only formatting tags (span, b, i, ...) and turn HTML entities back into characters.
+        # A raw "<" in code such as "i < n" must survive, so only known formatting tags are removed.
+        # strip("\n") removes blank lines at the ends; the final "+ '\n'" adds one newline at the end of the file.
         code = unescape(re.sub(r"</?(?:span|b|i|em|strong|u|mark)\b[^>]*>", "", inner)).strip("\n") + "\n"
-        dest = out / rel
-        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest = out / rel  # the full output path, e.g. labs/python/01_neuron.py
+        dest.parent.mkdir(parents=True, exist_ok=True)  # create the subfolder, such as "python"
         dest.write_text(code, encoding="utf-8")
+        # data-pip may list several packages separated by commas. filter(None, ...) drops the empty entries.
         for p in filter(None, (x.strip() for x in attr(attrs, "data-pip").split(","))):
             pips.add(p)
+        # Record what the runner needs to know about this file.
+        # title falls back to the file name without its extension; run is True only for data-run="yes".
         labs.append({"file": rel, "lang": attr(attrs, "data-lang"), "title": attr(attrs, "data-title") or Path(rel).stem,
                      "run": attr(attrs, "data-run") == "yes", "expect": attr(attrs, "data-expect")})
-    import json
-    (out / "labs.json").write_text(json.dumps(labs, indent=1), encoding="utf-8")
-    (out / "run_all.py").write_text(RUN_ALL, encoding="utf-8")
+    import json  # imported here because only the next few lines use it
+    (out / "labs.json").write_text(json.dumps(labs, indent=1), encoding="utf-8")  # the list read by run_all.py
+    (out / "run_all.py").write_text(RUN_ALL, encoding="utf-8")  # the runner script
+    # requirements.txt: one package per line, sorted. If there are none, say so.
     (out / "requirements.txt").write_text("\n".join(sorted(pips)) + ("\n" if pips else "# standard library only\n"), encoding="utf-8")
+    # One markdown table row per lab file, for the README. "-" stands in for a missing language or expected value.
     rows = "\n".join(f"| `{l['file']}` | {l['title']} | {l['lang'] or '-'} | {('`' + l['expect'] + '`') if l['expect'] else '-'} |" for l in labs)
+    # The README is an f-string, so {...} parts are filled in with values. The text itself is teaching content.
     readme = f"""# {a.title}
 
 Runnable code for the chapter. Every file here is the same code printed in the chapter.
@@ -134,5 +158,6 @@ Each file prints `PASS` when it runs and its output contains the expected text.
     print(f"Wrote {len(labs)} lab file(s) plus README.md, run_all.py, labs.json, requirements.txt to {out}")
 
 
+# Run main() only when this file is executed directly, not when it is imported.
 if __name__ == "__main__":
     main()
