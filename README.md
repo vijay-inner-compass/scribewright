@@ -46,6 +46,30 @@ Copy-Item -Recurse skills\* "$env:USERPROFILE\.claude\skills\"
 
 Then restart Claude Code, or start a new session, so the skills are loaded. To confirm, ask Claude "what skills do you have?" or type the skill name after a slash.
 
+### Other coding agents
+
+The skills follow the open [Agent Skills](https://agentskills.io) format, so any agent that reads `SKILL.md` folders can use them. Copy each skill folder into that agent's global skills folder. Pick the agents you use:
+
+| Agent | Global skills folder |
+|---|---|
+| Claude Code | `~/.claude/skills/` |
+| OpenAI Codex | `~/.agents/skills/` |
+| Gemini CLI | `~/.gemini/skills/` |
+| GitHub Copilot CLI | `~/.copilot/skills/` |
+| Cursor | `~/.cursor/skills/` |
+| OpenCode | `~/.config/opencode/skills/` |
+| Amp, Replit and other universal agents | `~/.config/agents/skills/` |
+
+Folder names are taken from the agents' published paths and may change between versions. Check your agent's documentation if a skill does not load.
+
+Or use the [skills CLI](https://github.com/vercel-labs/skills), which detects the agents you have installed and copies the skills to them:
+
+```bash
+npx skills add vijay-inner-compass/claude-skills --skill '*' -g
+```
+
+The CLI runs third-party code from npm. Review it first if you are installing on a shared or work machine.
+
 ## Use them
 
 ### transcript-to-docs
