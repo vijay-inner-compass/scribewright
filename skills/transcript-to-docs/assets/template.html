@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Document title</title>
+<!--
+  Template for transcript-derived documentation. Copy this file, keep the style
+  block and the final script block unchanged, and replace the content of the
+  page sections. Sample content below is placeholder: every
+  sentence must be replaced with material from the transcript.
+  Change colours ONLY via the :root tokens.
+-->
+<style>
+:root{
+  --navy:#0B1F3A;        /* dark panels, headings */
+  --navy-2:#12305a;
+  --accent:#0E7C86;      /* single restrained accent (teal) */
+  --accent-soft:#E3F2F3; /* tinted card background */
+  --ink:#1F2937;         /* body text */
+  --muted:#64748B;       /* secondary text */
+  --line:#D5DBE3;        /* card borders, table rules */
+  --card:#FFFFFF;
+  --paper:#F4F6F9;
+  --code-bg:#EEF1F5;
+  --font:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:Consolas,"SFMono-Regular","DejaVu Sans Mono",monospace;
+}
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--font);color:var(--ink);font-size:10.5px;line-height:1.38}
+
+/* ---------- page shell ---------- */
+.page{width:297mm;height:210mm;padding:9mm 11mm 7mm;display:flex;flex-direction:column;gap:8px;
+  overflow:hidden;page-break-after:always;break-after:page;background:var(--paper);position:relative}
+.page:last-child{page-break-after:auto;break-after:auto}
+.head{display:flex;align-items:baseline;gap:12px;padding-bottom:5px;border-bottom:2px solid var(--navy)}
+.head h1{font-size:23px;letter-spacing:.2px;text-transform:uppercase;color:var(--navy);font-weight:800;white-space:nowrap}
+.head .tag{font-size:12px;color:var(--accent);font-weight:600;flex:1}
+.head .meta{font-size:9px;color:var(--muted);text-align:right;white-space:nowrap}
+.row{display:grid;gap:8px}
+.r2{grid-template-columns:1.25fr 1fr}.r2e{grid-template-columns:1fr 1fr}
+.r3{grid-template-columns:1fr 1fr 1fr}.r3w{grid-template-columns:1.5fr 1fr 1fr}
+.page>.card,.page>.row,.page>.head,.page>.gloss{flex-shrink:0}  /* never squash: overflow must show up in the check */
+.grow{flex:1 0 auto}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:9px 12px;min-height:0;overflow:hidden}
+.card.accent{border-color:var(--accent);border-width:1.5px}
+.card.tint{background:var(--accent-soft);border-color:#BFDDE0}
+.card.dark{background:var(--navy);border-color:var(--navy);color:#E6ECF4}
+.card h2{font-size:12.5px;color:var(--navy);margin-bottom:6px;font-weight:700}
+.card.dark h2{color:#fff}
+.sub{font-size:9px;color:var(--muted);margin-top:4px}
+.card.dark .sub{color:#9FB3CC}
+p+p{margin-top:4px}
+b,strong{font-weight:700;color:var(--navy)}
+.card.dark b{color:#fff}
+
+/* ---------- flow strip: "what is the system" ---------- */
+.flow{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0 6px}
+.node{border:1px solid var(--line);border-radius:5px;padding:5px 10px;text-align:center;background:#fff;min-width:108px}
+.node b{display:block;font-size:10.5px}
+.node i{display:block;font-style:normal;font-size:8.5px;color:var(--muted)}
+.node.hl{border-color:var(--accent);background:var(--accent-soft)}
+.node.dk{background:var(--navy);border-color:var(--navy)}
+.node.dk b{color:#fff}.node.dk i{color:#9FB3CC}
+.arrow{color:var(--muted);font-size:12px}
+
+/* ---------- tables ---------- */
+table.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:9.5px;color:var(--accent);font-weight:700;padding:3px 6px 4px 0;border-bottom:1.5px solid var(--navy)}
+.tbl td{padding:4px 8px 4px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child{color:var(--ink)}
+
+/* ---------- facts panel (dark, "numbers that settle arguments") ---------- */
+ul.facts{list-style:none}
+ul.facts li{padding:4px 0 4px 14px;position:relative;border-bottom:1px solid rgba(255,255,255,.1)}
+ul.facts li:last-child{border-bottom:0}
+ul.facts li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:#4FC3CC}
+.src{font-size:8.5px;color:#9FB3CC}
+
+/* ---------- numbered steps ---------- */
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:2px 0 2px 22px;margin-bottom:3px}
+ol.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:15px;height:15px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:9px;font-weight:700;text-align:center;line-height:15px}
+
+/* ---------- bullets for "where it breaks" ---------- */
+ul.pts{list-style:none}
+ul.pts li{padding:2px 0 3px 12px;position:relative}
+ul.pts li:before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--accent);border-radius:1px}
+
+/* ---------- code ---------- */
+pre.code{background:var(--code-bg);border:1px solid var(--line);border-radius:4px;padding:7px 9px;font-family:var(--mono);
+  font-size:9.3px;line-height:1.45;white-space:pre-wrap;color:#1b2a3d}
+pre.code .c{color:#7A8799}
+code{font-family:var(--mono);font-size:9.3px;background:var(--code-bg);color:var(--navy-2);padding:0 4px;border-radius:3px}
+.card.dark code{background:rgba(255,255,255,.12);color:#CFEFF2}
+
+/* ---------- value tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:5px;padding:5px 8px}
+.tile small{display:block;font-size:8.5px;color:var(--muted)}
+.tile b{font-size:11px}
+
+/* ---------- mnemonic / framework card ---------- */
+.mnemo p{margin:2px 0}.mnemo p b{color:var(--accent);font-size:11px}
+.coined{font-size:8px;letter-spacing:1.2px;color:var(--accent);margin-top:6px;font-weight:700}
+
+/* ---------- links + glossary footer ---------- */
+ul.links{list-style:none}ul.links li{padding:1.5px 0}
+ul.links code{background:none;padding:0;color:var(--accent)}
+.gloss{margin-top:auto;border-top:1px solid var(--navy);padding-top:5px;display:flex;gap:18px;font-size:8.5px;color:var(--muted)}
+.gloss span b{color:var(--accent);margin-right:3px}
+.pageno{position:absolute;right:11mm;bottom:2.5mm;font-size:8px;color:var(--muted)}
+
+/* ---------- research / learning additions ---------- */
+.pill{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  background:var(--accent);color:#fff;border-radius:9px;padding:1px 7px;margin-left:8px;vertical-align:2px}
+.card.research{border:1.5px dashed var(--accent);background:#fff}
+.card.learn{background:var(--accent-soft);border-color:#BFDDE0}
+sup.cite{font-size:7.5px;color:var(--accent);font-weight:700;margin-left:1px}
+dl.explain{display:grid;grid-template-columns:78px 1fr;gap:3px 8px}
+dl.explain dt{font-size:8.5px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.4px;padding-top:1px}
+dl.explain dd{margin:0}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.level{background:#fff;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:5px;padding:7px 10px}
+.level:nth-child(2){border-top-color:var(--navy-2)}.level:nth-child(3){border-top-color:var(--navy)}
+.level h3{font-size:11px;color:var(--navy);margin-bottom:3px}
+.level .goal{font-size:9px;color:var(--muted);margin-top:4px}
+ol.refs{list-style:none;counter-reset:r}
+ol.refs li{counter-increment:r;position:relative;padding:3px 0 3px 22px;border-bottom:1px solid var(--line);font-size:9.5px}
+ol.refs li:last-child{border-bottom:0}
+ol.refs li:before{content:counter(r);position:absolute;left:0;top:3px;font-weight:700;color:var(--accent)}
+ol.refs code{background:none;padding:0;color:var(--accent);word-break:break-all}
+ol.refs .why{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: overview / concept + decision table + key facts + steps ============ -->
+<section class="page">
+  <div class="head">
+    <h1>Page title</h1>
+    <span class="tag">One-sentence promise: what the reader can do after this page.</span>
+    <span class="meta">Part 1 of 2 · Source session, 2 Nov 2026 · Organisation</span>
+  </div>
+
+  <div class="card">
+    <h2>What you are actually dealing with</h2>
+    <div class="flow">
+      <div class="node"><b>Input</b><i>where it starts</i></div><span class="arrow">→</span>
+      <div class="node hl"><b>Step A</b><i>what it does</i></div><span class="arrow">→</span>
+      <div class="node hl"><b>Step B</b><i>what it does</i></div><span class="arrow">→</span>
+      <div class="node"><b>Step C</b><i>what it does</i></div><span class="arrow">→</span>
+      <div class="node dk"><b>Outcome</b><i>what you end with</i></div>
+    </div>
+    <p>Lead statement of the key idea in one or two sentences, with the one number that matters in bold.</p>
+    <p class="sub">The teaching or decision insight the speaker stressed, stated once.</p>
+  </div>
+
+  <div class="row r2 grow">
+    <div class="card accent">
+      <h2>Which option do I pick?</h2>
+      <table class="tbl">
+        <tr><th>You have</th><th>Reach for</th></tr>
+        <tr><td>Situation one</td><td><b>Option one</b>, with the reason in plain words</td></tr>
+        <tr><td>Situation two</td><td><b>Option two</b>, with the reason in plain words</td></tr>
+        <tr><td>Situation with a constraint</td><td>Stop here. State the blocker and who can remove it</td></tr>
+      </table>
+    </div>
+    <div class="card dark">
+      <h2>Numbers that settle arguments</h2>
+      <ul class="facts">
+        <li><b>18.6</b> is the figure agreed in the session. <span class="src">Speaker, timestamp or source</span></li>
+        <li><b>5432</b> is the default value. <span class="src">Source</span></li>
+        <li>A dated or owned commitment goes here. <span class="src">Source</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row r2e grow">
+    <div class="card accent">
+      <h2>Procedure A, step by step</h2>
+      <ol class="steps">
+        <li>First action, naming the exact control, file or command.</li>
+        <li>Second action. Include the value to enter and why it matters.</li>
+        <li>Third action. Include what a successful result looks like.</li>
+      </ol>
+    </div>
+    <div class="card accent">
+      <h2>Procedure B, step by step</h2>
+      <ol class="steps">
+        <li>First action for the alternative route.</li>
+        <li>Second action, with the caveat the speaker raised.</li>
+        <li>Verify: say how the reader knows it worked.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="gloss">
+    <span><b>term</b>one-line definition</span><span><b>term</b>one-line definition</span><span><b>term</b>one-line definition</span>
+  </div>
+  <span class="pageno">1</span>
+</section>
+
+<!-- ============ PAGE 2: do it / verify / recover ============ -->
+<section class="page">
+  <div class="head">
+    <h1>Verify and recover</h1>
+    <span class="tag">Prove it works, then fix the usual failures.</span>
+    <span class="meta">Part 2 of 2 · Source session, 2 Nov 2026 · Organisation</span>
+  </div>
+
+  <div class="row r2">
+    <div class="card">
+      <h2>Prove it works, in under a minute</h2>
+<pre class="code"><span class="c"># comment explaining the line</span>
+command --check
+second command    <span class="c"># expected result</span></pre>
+      <p class="sub">When to run this and what a good answer proves.</p>
+    </div>
+    <div class="card accent">
+      <h2>Reference table</h2>
+      <table class="tbl">
+        <tr><th>Item</th><th>What it gives you</th></tr>
+        <tr><td><code>item</code></td><td>Description</td></tr>
+        <tr><td><code>item</code></td><td>Description</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row r2 grow">
+    <div class="card">
+      <h2>Where it actually breaks</h2>
+      <ul class="pts">
+        <li><b>Symptom as the user sees it</b>: the real cause and the one-line fix.</li>
+        <li><b>Another symptom</b>: the real cause and the one-line fix.</li>
+        <li><b>A look-alike failure</b>: how to tell it apart from the one above.</li>
+      </ul>
+    </div>
+    <div class="card tint">
+      <h2>The values every client asks for</h2>
+      <div class="tiles">
+        <div class="tile"><small>1 Field</small><b>value</b></div>
+        <div class="tile"><small>2 Field</small><b>value</b></div>
+        <div class="tile"><small>3 Field</small><b>value</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row r3w">
+    <div class="card"><h2>Decision guide</h2><p>Short statement of when to use it.</p></div>
+    <div class="card accent mnemo">
+      <h2>ACRONYM is your debug order</h2>
+      <p><b>A</b>ction: first check.</p><p><b>C</b>heck: second check.</p>
+      <div class="coined">NAME ONLY IF THE SPEAKER COINED IT</div>
+    </div>
+    <div class="card">
+      <h2>Go deeper</h2>
+      <ul class="links"><li><b>Resource name</b> <code>example.com/path</code></li></ul>
+    </div>
+  </div>
+
+  <div class="gloss"><span><b>term</b>definition</span><span><b>term</b>definition</span></div>
+  <span class="pageno">2</span>
+</section>
+
+<!-- ============ PAGE 3 (research): go deeper for a beginner ============ -->
+<section class="page">
+  <div class="head">
+    <h1>Go deeper</h1>
+    <span class="tag">Foundations and explainers added from research, for a first-time reader.</span>
+    <span class="meta">Part 3 of 4 · Researched material is marked · Organisation</span>
+  </div>
+
+  <div class="row r2e">
+    <div class="card research">
+      <h2>Concept in plain words <span class="pill">Researched</span></h2>
+      <dl class="explain">
+        <dt>Plain</dt><dd>One-sentence definition with no undefined jargon.<sup class="cite">1</sup></dd>
+        <dt>Picture</dt><dd>An accurate analogy, and where it stops working.</dd>
+        <dt>Example</dt><dd>A tiny worked example with real numbers or a real command.</dd>
+        <dt>Why it matters</dt><dd>The consequence in practice.</dd>
+        <dt>Mistake</dt><dd>The usual misunderstanding.</dd>
+      </dl>
+    </div>
+    <div class="card research">
+      <h2>Second concept <span class="pill">Researched</span></h2>
+      <dl class="explain">
+        <dt>Plain</dt><dd>One-sentence definition.<sup class="cite">2</sup></dd>
+        <dt>Example</dt><dd>Worked example.</dd>
+        <dt>Mistake</dt><dd>Common error and how to spot it.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="card learn">
+    <h2>Practice path</h2>
+    <div class="levels">
+      <div class="level"><h3>Beginner</h3><ul class="pts"><li>Concrete task one</li><li>Concrete task two</li></ul><div class="goal">Ready for the next level when: a checkable outcome.</div></div>
+      <div class="level"><h3>Intermediate</h3><ul class="pts"><li>Concrete task one</li><li>Concrete task two</li></ul><div class="goal">Ready when: a checkable outcome.</div></div>
+      <div class="level"><h3>Advanced</h3><ul class="pts"><li>Concrete task one</li><li>Concrete task two</li></ul><div class="goal">Ready when: a checkable outcome.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Sources and further reading</h2>
+    <ol class="refs">
+      <li><b>Title of source</b>, publisher or author. <code>https://example.org/page</code> <span class="why">Accessed 2 Nov 2026. Used for the definition on this page.</span></li>
+      <li><b>Title of source</b>, publisher or author. <code>https://example.org/other</code> <span class="why">Accessed 2 Nov 2026. Recommended reading: best beginner explanation.</span></li>
+    </ol>
+  </div>
+
+  <div class="gloss"><span><b>term</b>definition</span></div>
+  <span class="pageno">3</span>
+</section>
+
+<script>
+/* Layout self-check used by scripts/render_pdf.py: flags pages whose content
+   is taller than the sheet, because overflow is clipped silently in the PDF. */
+window.addEventListener('load',function(){
+  document.querySelectorAll('.page').forEach(function(p){
+    if(p.scrollHeight>p.clientHeight+1){p.setAttribute('data-overflow','true');}
+  });
+});
+</script>
+</body>
+</html>

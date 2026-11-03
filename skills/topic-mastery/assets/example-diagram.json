@@ -1,0 +1,11 @@
+{
+  "nodes": [
+    {"id": "a", "label": "Core terms", "sub": "vocabulary"},
+    {"id": "b", "label": "Mental model", "sub": "what and why", "style": "hl"},
+    {"id": "c", "label": "Mechanism", "sub": "how it works"},
+    {"id": "d", "label": "Hands-on lab", "sub": "Python and C#", "style": "hl"},
+    {"id": "e", "label": "Evaluation", "sub": "measure and improve"},
+    {"id": "f", "label": "Expert decisions", "sub": "trade-offs", "style": "dk"}
+  ],
+  "edges": [["a", "b"], ["b", "c"], ["b", "d"], ["c", "e"], ["d", "e"], ["e", "f"]]
+}

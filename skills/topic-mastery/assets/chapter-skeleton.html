@@ -1,0 +1,102 @@
+<!-- Chapter skeleton: copy this file's structure; replace every sample sentence with researched content.
+     Build: python scripts/make_diagram.py assets/example-diagram.json -o assets/example.svg
+            python scripts/build_doc.py assets/chapter-skeleton.html -o out.html --title "Sample" --running "Sample | Chapter 1" -->
+
+<div class="cover">
+  <div class="band">
+    <div class="kicker">Chapter 1</div>
+    <h1>Sample chapter title</h1>
+    <p>One sentence promising what the learner can do after this chapter.</p>
+  </div>
+  <div class="meta-grid">
+    <div><small>Level reached</small><b>2 Practitioner</b></div>
+    <div><small>Estimated effort</small><b>6 hours</b></div>
+    <div><small>Prerequisites</small><b>Chapter 0</b></div>
+    <div><small>Running example</small><b>Stage 2: sample</b></div>
+    <div><small>Languages</small><b>Python, C#</b></div>
+    <div><small>Version</small><b>1.0, 2 Nov 2026</b></div>
+  </div>
+</div>
+
+<nav class="toc">
+  <h3 style="margin-top:0;font-size:15pt;color:var(--navy)">Contents</h3>
+  <ol>
+    <li><span class="n">1</span><a href="#s1">Mental model and taxonomy</a></li>
+    <li><span class="n">2</span><a href="#s2">Foundations</a></li>
+    <li><span class="n">3</span><a href="#s3">Practical application</a></li>
+    <li><span class="n">4</span><a href="#s4">Mastery assessment</a></li>
+    <li><span class="n">5</span><a href="#refs">Sources</a></li>
+  </ol>
+</nav>
+
+<h1 id="s1"><span class="kicker">Section 1</span>Mental model and taxonomy</h1>
+<p class="lead">State the idea in two sentences a beginner can repeat.</p>
+<div class="legend">
+  <span><span class="ev est">Established</span>agreed fact</span><span><span class="ev int">Interpretation</span>reasoned reading</span>
+  <span><span class="ev ass">Assumption</span>premise adopted</span><span><span class="ev pre">Prediction</span>forecast</span><span><span class="ev gap">Gap</span>evidence missing or stale</span>
+</div>
+<div class="analogy"><span class="ttl">Analogy</span>An everyday picture of the idea. <b>Where it breaks:</b> say what the analogy gets wrong.</div>
+<p><span class="ev est">Established</span>A precise definition with a citation.<a class="cite" href="#S1">S1</a></p>
+
+<figure class="diagram">
+  <!--svg:example-diagram.svg-->
+  <figcaption><b>Figure 1.</b> Learning flow for this chapter.
+    <div class="inwords"><b>In words</b> Core terms feed the mental model, which leads to both the mechanism and the hands-on lab; both feed evaluation, which leads to expert decisions.</div></figcaption>
+</figure>
+
+<h2 id="s2">Foundations</h2>
+<h3>Key terms</h3>
+<dl class="gl"><dt>Term</dt><dd>Plain definition used consistently from here on.</dd><dt>Second term</dt><dd>Definition.</dd></dl>
+<div class="callout warn"><b>Common misconception</b><p>The belief learners hold, why it is attractive, and what is true instead.<a class="cite" href="#S1">S1</a></p></div>
+
+<table class="tbl"><caption>Comparison of alternatives</caption>
+  <tr><th>Option</th><th>Best when</th><th>Limits</th></tr>
+  <tr><td>Option A</td><td>Condition</td><td>Cost or failure mode</td></tr>
+  <tr><td>Option B</td><td>Condition</td><td>Cost or failure mode</td></tr>
+</table>
+
+<h2 id="s3">Practical application</h2>
+<span class="ev int">Interpretation</span>
+<ol class="steps">
+  <li><b>Set up.</b> Run <code>python --version</code> and <code>dotnet --version</code>; expect Python 3 and .NET 10 or later.</li>
+  <li><b>Run the example.</b> Compare your output with the block shown below.</li>
+</ol>
+<h4>Python</h4>
+<pre class="code" data-lang="python" data-file="python/01_total.py" data-title="Sum a list" data-run="yes" data-expect="Total: 6">
+items = [1, 2, 3]
+total = sum(items)
+assert total == 6          # validation: the result matches the worked example
+print(f"Total: {total}")
+</pre>
+<h4>C#</h4>
+<pre class="code" data-lang="csharp" data-file="csharp/01_total.cs" data-title="Sum a list" data-run="yes" data-expect="Total: 6">
+int[] items = { 1, 2, 3 };
+int total = items.Sum();
+if (total != 6) throw new Exception("validation failed");
+Console.WriteLine($"Total: {total}");
+</pre>
+<pre class="code out">Total: 6</pre>
+<table class="tbl"><caption>Troubleshooting</caption>
+  <tr><th>Symptom</th><th>Likely cause</th><th>Fix</th></tr>
+  <tr><td>Command not found</td><td>SDK not on PATH</td><td>Install it and reopen the terminal</td></tr>
+</table>
+
+<h2 id="s4">Mastery assessment</h2>
+<div class="callout key"><b>Key takeaways</b><ul class="pts"><li>A takeaway the learner can say from memory.</li></ul></div>
+<div class="callout warn"><b>Common mistakes</b><ul class="pts"><li>Mistake, why it happens, how to spot and fix it.</li></ul></div>
+<div class="callout try"><b>Exercise 1 <span class="diff">Practitioner</span></b><p>Task on the running example, the deliverable, and how it is checked.</p></div>
+<div class="callout expert"><b>Challenge question</b><p>A scenario with no single obvious answer. What would change your mind?</p></div>
+<table class="tbl rubric"><caption>Measurable criteria</caption>
+  <tr><th>Criterion</th><th>Developing</th><th>Competent</th><th>Expert</th></tr>
+  <tr><td>Accuracy</td><td>Core idea right</td><td>Correct and complete</td><td>States limits and exceptions</td></tr>
+</table>
+<h4>Self-check</h4>
+<ul class="check"><li>I can explain the mental model without notes.</li><li>I can reproduce the lab result and fix a seeded fault.</li></ul>
+
+<h2>Coverage note</h2>
+<p><span class="ev gap">Gap</span>Dimension 12 (future outlook) is thin for this chapter because no dated roadmap was found; next step: check the vendor roadmap page.</p>
+
+<h1 id="refs"><span class="kicker">References</span>Sources</h1>
+<ol class="refs">
+  <li id="S1"><span class="id">S1</span><b>Title of source</b>, publisher. <code>https://example.org/page</code> <span class="tier">Tier 1</span> <span class="why">Published 2024-03-28. Accessed 2 Nov 2026. Supports the definition.</span></li>
+</ol>

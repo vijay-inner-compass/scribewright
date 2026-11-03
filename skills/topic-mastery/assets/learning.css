@@ -1,0 +1,184 @@
+/* Enterprise long-form learning document: navy + slate + teal. Portrait A4, flowing pages.
+   Change colours ONLY through the :root tokens. */
+:root{
+  --navy:#0B1F3A; --navy-2:#12305a; --accent:#0E7C86; --accent-soft:#E3F2F3;
+  --ink:#1F2937; --muted:#64748B; --line:#D5DBE3; --paper:#F4F6F9; --card:#FFFFFF;
+  --code-bg:#EEF1F5; --warn:#9A5B00; --warn-soft:#FFF4E0; --bad:#9B1C1C;
+  --font:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:Consolas,"SFMono-Regular","DejaVu Sans Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--font);color:var(--ink);font-size:10pt;line-height:1.5;margin:0}
+main{max-width:178mm;margin:0 auto}
+p{margin:0 0 7px}
+a{color:var(--accent);text-decoration:none}
+b,strong{color:var(--navy)}
+
+/* ---------- headings ---------- */
+h1{font-size:23pt;line-height:1.2;color:var(--navy);margin:0 0 4mm;padding-bottom:3mm;border-bottom:2.5px solid var(--accent);
+   break-before:page;break-after:avoid}
+h1 .kicker{display:block;font-size:9pt;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+h2{font-size:15pt;color:var(--navy);margin:9mm 0 3mm;break-after:avoid}
+h3{font-size:11.5pt;color:var(--accent);margin:6mm 0 2mm;break-after:avoid}
+h4{font-size:9pt;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:4mm 0 1mm;break-after:avoid}
+h1.nobreak{break-before:auto}
+.lead{font-size:11.5pt;color:var(--navy-2);line-height:1.5}
+
+/* ---------- cover ---------- */
+.cover{height:245mm;display:flex;flex-direction:column;justify-content:space-between;break-after:page}
+.cover .band{background:var(--navy);color:#fff;padding:22mm 14mm 18mm;border-radius:4px;border-left:8px solid var(--accent)}
+.cover .band .kicker{font-size:9pt;letter-spacing:2px;text-transform:uppercase;color:#7FD3DA;font-weight:700}
+.cover .band h1{color:#fff;border:0;font-size:30pt;margin:6mm 0 4mm;padding:0;break-before:auto}
+.cover .band p{color:#C9D6E6;font-size:12pt;max-width:140mm}
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.meta-grid div{border:1px solid var(--line);border-radius:5px;padding:7px 10px;background:var(--paper)}
+.meta-grid small{display:block;color:var(--muted);font-size:8pt;text-transform:uppercase;letter-spacing:.6px}
+.meta-grid b{font-size:10.5pt}
+
+/* ---------- contents ---------- */
+.toc{break-after:page}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid var(--line)}
+.toc li a{color:var(--ink)}
+.toc li .n{width:24px;color:var(--accent);font-weight:700}
+.toc li .lv{margin-left:auto;font-size:8.5pt;color:var(--muted)}
+.toc li.sub{padding-left:30px;font-size:9.5pt}
+
+/* ---------- callouts ---------- */
+.callout{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:4px;background:var(--paper);padding:8px 12px;margin:4mm 0;break-inside:avoid}
+.callout>b:first-child,.callout .ttl{display:block;font-size:8.5pt;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:2px}
+.callout p:last-child,.callout ul:last-child,.callout ol:last-child{margin-bottom:0}
+.callout.key{background:var(--accent-soft);border-color:#BFDDE0;border-left-color:var(--accent)}
+.callout.warn{background:var(--warn-soft);border-color:#F0D9AE;border-left-color:var(--warn)}
+.callout.warn>b:first-child,.callout.warn .ttl{color:var(--warn)}
+.callout.expert{background:var(--navy);border-color:var(--navy);border-left-color:#4FC3CC;color:#E6ECF4}
+.callout.expert>b:first-child,.callout.expert .ttl{color:#7FD3DA}
+.callout.expert b{color:#fff}
+.callout.try{background:#fff;border-left-color:var(--navy-2)}
+.callout.try>b:first-child,.callout.try .ttl{color:var(--navy-2)}
+.analogy{border-left:4px solid var(--navy-2);background:#fff;border:1px solid var(--line);border-left-width:4px;padding:8px 12px;margin:4mm 0;border-radius:4px;break-inside:avoid}
+.analogy .ttl{display:block;font-size:8.5pt;text-transform:uppercase;letter-spacing:.8px;color:var(--navy-2);font-weight:700;margin-bottom:2px}
+
+/* ---------- evidence labels ---------- */
+.ev{display:inline-block;font-size:7pt;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-radius:8px;padding:0 6px;margin-right:4px;vertical-align:1px;line-height:1.5;white-space:nowrap}
+.ev.est{background:var(--accent);color:#fff}
+.ev.int{background:var(--navy);color:#fff}
+.ev.ass{border:1px dashed var(--muted);color:var(--muted)}
+.ev.pre{border:1px solid var(--navy-2);color:var(--navy-2)}
+.ev.gap{background:var(--warn-soft);color:var(--warn);border:1px solid #F0D9AE}
+a.cite,sup.cite{font-size:7.5pt;color:var(--accent);font-weight:700;vertical-align:super;margin-left:1px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:8.5pt;color:var(--muted);margin:3mm 0}
+
+/* ---------- tables ---------- */
+table.tbl{width:100%;border-collapse:collapse;margin:3mm 0;font-size:9.3pt;break-inside:auto}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:5px 8px;font-size:8.5pt;letter-spacing:.3px}
+.tbl td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr{break-inside:avoid}
+.tbl tr:nth-child(even) td{background:var(--paper)}
+.tbl td:first-child{font-weight:600;color:var(--navy)}
+table.keep{break-inside:avoid}
+thead{display:table-header-group}
+caption{caption-side:top;text-align:left;font-size:8.5pt;color:var(--muted);padding-bottom:2px}
+.c-strong{background:#D3EBEC!important;color:#07555C;font-weight:700;text-align:center}
+.c-part{background:#FBEFD2!important;color:var(--warn);font-weight:700;text-align:center}
+.c-gap{background:#F6D9D9!important;color:var(--bad);font-weight:700;text-align:center}
+.tbl .score{text-align:center;font-weight:700}
+
+/* ---------- diagrams ---------- */
+figure.diagram{margin:4mm 0;border:1px solid var(--line);border-radius:5px;background:#fff;padding:8px;break-inside:avoid}
+figure.diagram svg{width:100%;height:auto;display:block}
+figure.diagram.narrow svg{max-width:300px;margin:0 auto}
+figure.diagram.mid svg{max-width:520px;margin:0 auto}
+figcaption{font-size:8.5pt;color:var(--muted);margin-top:4px}
+figcaption b{color:var(--navy)}
+.inwords{border-top:1px dashed var(--line);margin-top:6px;padding-top:5px;font-size:9pt;color:var(--ink)}
+.inwords b{color:var(--accent);text-transform:uppercase;font-size:8pt;letter-spacing:.6px}
+svg .n rect{fill:#fff;stroke:#9FB3CC;stroke-width:1.2}
+svg .n.hl rect{fill:var(--accent-soft);stroke:var(--accent)}
+svg .n.dk rect{fill:var(--navy);stroke:var(--navy)}
+svg .n text{font-family:var(--font);font-size:11px;fill:var(--navy);text-anchor:middle}
+svg .n.dk text{fill:#fff}
+svg .n .sub{font-size:9px;fill:var(--muted)}
+svg .n.dk .sub{fill:#9FB3CC}
+svg .e{fill:none;stroke:#7B8CA3;stroke-width:1.3}
+svg .e.back{stroke-dasharray:4 3}
+svg .elbl{font-family:var(--font);font-size:9px;fill:var(--muted);text-anchor:middle}
+svg .gtitle{font-family:var(--font);font-size:9px;font-weight:700;fill:var(--accent);letter-spacing:.8px;text-transform:uppercase}
+
+/* ---------- charts (make_chart.py) ---------- */
+svg .axis{fill:#fff;stroke:#9FB3CC;stroke-width:1}
+svg .tick,svg .note{font-family:var(--font);font-size:9px;fill:var(--muted);text-anchor:middle}
+svg .axlabel{font-family:var(--font);font-size:10px;fill:var(--ink);text-anchor:middle}
+svg .ptitle{font-family:var(--font);font-size:11px;font-weight:700;fill:var(--navy);text-anchor:middle}
+svg .pt{stroke-width:1.6}
+svg .pt.c0{fill:#fff;stroke:var(--navy)}
+svg .pt.c1{fill:var(--accent);stroke:var(--accent)}
+svg .ptlabel{font-family:var(--font);font-size:8px;fill:var(--muted);text-anchor:middle}
+svg .pt.c1+.ptlabel{fill:#fff}
+svg .ln{fill:none;stroke:var(--navy-2);stroke-width:2}
+svg .ln.ok{stroke:var(--accent)}
+svg .ln.bad{stroke:var(--bad);stroke-dasharray:5 3}
+svg .bar{fill:var(--navy-2)}
+svg .bar.ok{fill:var(--accent)}
+svg .bar.bad{fill:var(--bad)}
+
+/* ---------- infographic stat cards ---------- */
+.statcards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4mm 0}
+.stat{border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:5px;background:#fff;padding:8px 10px;text-align:center;break-inside:avoid}
+.stat .num{font-size:24pt;font-weight:800;color:var(--navy);line-height:1.1}
+.stat .lbl{font-size:8.5pt;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+.stat .sub{font-size:9pt;margin-top:4px}
+.stat.bad{border-top-color:var(--bad)}.stat.bad .num{color:var(--bad)}
+.stat.dark{background:var(--navy);border-color:var(--navy);border-top-color:#4FC3CC}.stat.dark .num{color:#fff}.stat.dark .lbl{color:#9FB3CC}.stat.dark .sub{color:#E6ECF4}
+
+/* ---------- timeline ---------- */
+ol.timeline{list-style:none;margin:3mm 0 3mm 10px;padding:0;border-left:3px solid var(--accent)}
+ol.timeline li{position:relative;padding:0 0 9px 18px;break-inside:avoid}
+ol.timeline li:before{content:"";position:absolute;left:-8px;top:4px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+ol.timeline .yr{font-weight:800;color:var(--navy);margin-right:6px}
+
+/* ---------- levels / objectives / checklists ---------- */
+.levels4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:3mm 0}
+.lvl{border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:4px;padding:6px 8px;font-size:9pt;background:#fff;break-inside:avoid}
+.lvl:nth-child(2){border-top-color:#2B8F98}.lvl:nth-child(3){border-top-color:var(--navy-2)}.lvl:nth-child(4){border-top-color:var(--navy)}
+.lvl h4{margin:0 0 3px;color:var(--navy);font-size:9.5pt;text-transform:none;letter-spacing:0}
+.lvl p{margin:0 0 3px;font-size:8.8pt}
+ul.check{list-style:none;padding:0;margin:2mm 0}
+ul.check li{position:relative;padding:2px 0 2px 20px}
+ul.check li:before{content:"";position:absolute;left:0;top:5px;width:11px;height:11px;border:1.5px solid var(--accent);border-radius:2px}
+ul.pts{list-style:none;padding:0;margin:2mm 0}
+ul.pts li{position:relative;padding:1px 0 3px 14px}
+ul.pts li:before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--accent);border-radius:1px}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:2mm 0}
+ol.steps>li{counter-increment:s;position:relative;padding:2px 0 4px 26px}
+ol.steps>li:before{content:counter(s);position:absolute;left:0;top:2px;width:17px;height:17px;border-radius:50%;background:var(--accent);color:#fff;font-size:8.5pt;font-weight:700;text-align:center;line-height:17px}
+.diff{font-size:7.5pt;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:0 6px;margin-left:5px;vertical-align:1px}
+
+/* ---------- code ---------- */
+code{font-family:var(--mono);font-size:8.8pt;background:var(--code-bg);color:var(--navy-2);padding:0 4px;border-radius:3px}
+pre.code{position:relative;font-family:var(--mono);font-size:8.3pt;line-height:1.45;background:var(--code-bg);border:1px solid var(--line);
+  border-left:4px solid var(--accent);border-radius:4px;padding:16px 10px 8px;margin:3mm 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#1b2a3d}
+pre.code:before{content:attr(data-lang);position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-size:7pt;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;padding:1px 8px;border-radius:0 3px 0 4px}
+pre.code .c{color:#6B7A8E}
+pre.out{background:#fff;border-left-color:var(--navy-2)}
+pre.out:before{content:"output";background:var(--navy-2)}
+pre.code{break-inside:avoid}
+pre.code.long{break-inside:auto}
+
+/* ---------- glossary / references ---------- */
+dl.gl{margin:2mm 0}
+dl.gl dt{font-weight:700;color:var(--navy);float:left;clear:left;width:34mm}
+dl.gl dd{margin:0 0 4px 36mm}
+ol.refs{list-style:none;counter-reset:none;padding:0;margin:2mm 0;font-size:9pt}
+ol.refs li{padding:4px 0 4px 38px;border-bottom:1px solid var(--line);position:relative;break-inside:avoid}
+ol.refs li .id{position:absolute;left:0;top:4px;font-weight:700;color:var(--accent);width:34px}
+ol.refs li code{background:none;padding:0;color:var(--accent);overflow-wrap:anywhere}
+ol.refs .tier{font-size:7.5pt;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:0 6px;margin-left:4px;color:var(--muted)}
+ol.refs .why{color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two>*{min-width:0}
+.q{margin:2mm 0 3mm}
+.q .qn{font-weight:700;color:var(--accent)}
+.rubric td:first-child{width:34%}

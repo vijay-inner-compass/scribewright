@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1002 138" role="img">
+<defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7B8CA3"/></marker></defs>
+<path class="e" d="M164,37.0 C192.0,37.0 192.0,37.0 220,37.0" marker-end="url(#ah)"/>
+<path class="e" d="M370,37.0 C398.0,37.0 398.0,37.0 426,37.0" marker-end="url(#ah)"/>
+<path class="e" d="M370,37.0 C398.0,37.0 398.0,101.0 426,101.0" marker-end="url(#ah)"/>
+<path class="e" d="M576,37.0 C604.0,37.0 604.0,37.0 632,37.0" marker-end="url(#ah)"/>
+<path class="e" d="M576,101.0 C604.0,101.0 604.0,37.0 632,37.0" marker-end="url(#ah)"/>
+<path class="e" d="M782,37.0 C810.0,37.0 810.0,37.0 838,37.0" marker-end="url(#ah)"/>
+<g class="n"><rect x="14" y="14" width="150" height="46" rx="5"/>
+<text x="89.0" y="31">Core terms</text>
+<text class="sub" x="89.0" y="53">vocabulary</text>
+</g>
+<g class="n hl"><rect x="220" y="14" width="150" height="46" rx="5"/>
+<text x="295.0" y="31">Mental model</text>
+<text class="sub" x="295.0" y="53">what and why</text>
+</g>
+<g class="n"><rect x="426" y="14" width="150" height="46" rx="5"/>
+<text x="501.0" y="31">Mechanism</text>
+<text class="sub" x="501.0" y="53">how it works</text>
+</g>
+<g class="n hl"><rect x="426" y="78" width="150" height="46" rx="5"/>
+<text x="501.0" y="95">Hands-on lab</text>
+<text class="sub" x="501.0" y="117">Python and C#</text>
+</g>
+<g class="n"><rect x="632" y="14" width="150" height="46" rx="5"/>
+<text x="707.0" y="31">Evaluation</text>
+<text class="sub" x="707.0" y="53">measure and improve</text>
+</g>
+<g class="n dk"><rect x="838" y="14" width="150" height="46" rx="5"/>
+<text x="913.0" y="31">Expert decisions</text>
+<text class="sub" x="913.0" y="53">trade-offs</text>
+</g>
+</svg>

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Generated output from running the skills (anchored to the repo root so skill folders are not matched)
+/*-Mastery/
+/*-workspace/
+/out/
+/dist/
+/scratch/
+/body.html
+/linkedin-posts-*.md
+*.pdf
+*.skill
+
+# Editors and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

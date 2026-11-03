@@ -1,0 +1,87 @@
+<!-- Roadmap skeleton: replace every sample sentence with researched content.
+     python scripts/make_diagram.py assets/example-diagram.json -o assets/example.svg
+     python scripts/build_doc.py assets/roadmap-skeleton.html -o out.html --title "Sample roadmap" --running "Topic | Learning roadmap" -->
+
+<div class="cover">
+  <div class="band">
+    <div class="kicker">Learning roadmap</div>
+    <h1>Topic name</h1>
+    <p>From first principles to expert-level decisions: taxonomy, prerequisites, history, curriculum and evidence gaps.</p>
+  </div>
+  <div class="meta-grid">
+    <div><small>Audience</small><b>Motivated beginner</b></div>
+    <div><small>Target level</small><b>4 Expert</b></div>
+    <div><small>Estimated effort</small><b>60 hours</b></div>
+    <div><small>Languages</small><b>Python, C#</b></div>
+    <div><small>Modules</small><b>10 + capstone</b></div>
+    <div><small>Version</small><b>1.0, 2 Nov 2026</b></div>
+  </div>
+</div>
+
+<nav class="toc">
+  <h3 style="margin-top:0;font-size:15pt;color:var(--navy)">Contents</h3>
+  <ol>
+    <li><span class="n">1</span><a href="#r1">How to use this roadmap</a></li>
+    <li><span class="n">2</span><a href="#r2">The mental model and running example</a></li>
+    <li><span class="n">3</span><a href="#r3">Topic taxonomy</a></li>
+    <li><span class="n">4</span><a href="#r4">Prerequisite map</a></li>
+    <li><span class="n">5</span><a href="#r5">Historical timeline</a></li>
+    <li><span class="n">6</span><a href="#r6">Curriculum and coverage</a></li>
+    <li><span class="n">7</span><a href="#r7">Source-coverage gap analysis</a></li>
+    <li><span class="n">8</span><a href="#refs">Sources</a></li>
+  </ol>
+</nav>
+
+<h1 id="r1"><span class="kicker">Part 1</span>How to use this roadmap</h1>
+<p>Work in two steps: read this roadmap once, then study one major topic at a time. Each chapter ends with exercises and measurable criteria.</p>
+<div class="legend">
+  <span><span class="ev est">Established</span>agreed fact</span><span><span class="ev int">Interpretation</span>reasoned reading</span>
+  <span><span class="ev ass">Assumption</span>premise adopted</span><span><span class="ev pre">Prediction</span>forecast</span><span><span class="ev gap">Gap</span>evidence missing or stale</span>
+</div>
+<div class="levels4">
+  <div class="lvl"><h4>1 Beginner</h4><p>Explains the terms and the mental model.</p></div>
+  <div class="lvl"><h4>2 Practitioner</h4><p>Applies the method and troubleshoots.</p></div>
+  <div class="lvl"><h4>3 Architect</h4><p>Designs, compares, evaluates risk.</p></div>
+  <div class="lvl"><h4>4 Expert</h4><p>Decides under uncertainty and teaches.</p></div>
+</div>
+
+<h1 id="r2"><span class="kicker">Part 2</span>The mental model and running example</h1>
+<p class="lead">Two-sentence definition a beginner can repeat.</p>
+<div class="analogy"><span class="ttl">Analogy</span>Everyday picture. <b>Where it breaks:</b> the limit of the analogy.</div>
+<p><span class="ev est">Established</span>Rigorous definition.<a class="cite" href="#S1">S1</a></p>
+<div class="callout key"><b>Running example</b><p>Name, description, starting state, and how it grows across modules.</p></div>
+
+<h1 id="r3"><span class="kicker">Part 3</span>Topic taxonomy</h1>
+<figure class="diagram">
+  <!--svg:example-diagram.svg-->
+  <figcaption><b>Figure 1.</b> Taxonomy or prerequisite map.
+    <div class="inwords"><b>In words</b> Describe the diagram in one paragraph for readers who cannot see it.</div></figcaption>
+</figure>
+<table class="tbl"><tr><th>Major area</th><th>Subtopics</th><th>Module</th></tr>
+  <tr><td>Foundations</td><td>Terms, principles, prerequisites</td><td>M1</td></tr></table>
+
+<h1 id="r4"><span class="kicker">Part 4</span>Prerequisite map</h1>
+<table class="tbl"><tr><th>Prerequisite</th><th>Why needed</th><th>Quick check</th><th>Where to learn it</th></tr>
+  <tr><td>Skill</td><td>Reason</td><td>One-question test</td><td>Source<a class="cite" href="#S1">S1</a></td></tr></table>
+
+<h1 id="r5"><span class="kicker">Part 5</span>Historical timeline</h1>
+<ol class="timeline">
+  <li><span class="yr">1958</span><b>Event.</b> Contributor and significance.<a class="cite" href="#S1">S1</a></li>
+  <li><span class="yr">Now</span><b>Present state.</b> <span class="ev gap">Gap</span>What could not be verified.</li>
+</ol>
+
+<h1 id="r6"><span class="kicker">Part 6</span>Curriculum and coverage</h1>
+<table class="tbl"><tr><th>Module</th><th>Title</th><th>Level</th><th>Hours</th><th>Assessment</th></tr>
+  <tr><td>M1</td><td>Foundations</td><td>1</td><td>4</td><td>Quiz and teach-back</td></tr></table>
+<table class="tbl"><caption>Dimension coverage: S strong, P partial, G gap</caption>
+  <tr><th>Module</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th></tr>
+  <tr><td>M1</td><td class="c-strong">S</td><td class="c-strong">S</td><td class="c-part">P</td><td class="c-gap">G</td><td class="c-part">P</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-gap">G</td><td class="c-part">P</td></tr></table>
+
+<h1 id="r7"><span class="kicker">Part 7</span>Source-coverage gap analysis</h1>
+<table class="tbl"><tr><th>Area</th><th>Tier 1</th><th>Tier 2</th><th>Recency</th><th>Gap and next step</th></tr>
+  <tr><td>History</td><td class="c-strong">S</td><td class="c-part">P</td><td class="c-strong">S</td><td>What is missing and where to look.</td></tr></table>
+
+<h1 id="refs"><span class="kicker">References</span>Sources</h1>
+<ol class="refs">
+  <li id="S1"><span class="id">S1</span><b>Title of source</b>, publisher. <code>https://example.org/page</code> <span class="tier">Tier 1</span> <span class="why">Published 2024-03-28. Accessed 2 Nov 2026.</span></li>
+</ol>
