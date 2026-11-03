@@ -1,6 +1,6 @@
-# Claude skills
+# Agent skills
 
-Three Claude skills for turning notes, transcripts and topics into learning material and LinkedIn content.
+Three agent skills for turning notes, transcripts and topics into learning material and LinkedIn posts. They work with Claude Code, Codex, Gemini CLI, GitHub Copilot CLI and other agents that read the Agent Skills format.
 
 | Skill | What it does | Input | Output |
 |---|---|---|---|
@@ -65,7 +65,7 @@ Folder names are taken from the agents' published paths and may change between v
 Or use the [skills CLI](https://github.com/vercel-labs/skills), which detects the agents you have installed and copies the skills to them:
 
 ```bash
-npx skills add vijay-inner-compass/claude-skills --skill '*' -g
+npx skills add vijay-inner-compass/agent-skills --skill '*' -g
 ```
 
 The CLI runs third-party code from npm. Review it first if you are installing on a shared or work machine.
